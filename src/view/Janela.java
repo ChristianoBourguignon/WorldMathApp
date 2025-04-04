@@ -1,9 +1,8 @@
 package view;
 import models.Calculo;
-import java.awt.Color;
-import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 
@@ -44,7 +43,7 @@ public class Janela extends JFrame implements ActionListener {
         this.labelResultado = new JLabel("Resultado:");
         this.labelInput1.setBounds(20,70,150,30);
         this.labelInput2.setBounds(220,70,150,30);
-        this.labelEquacao.setBounds(420,70,150,30);
+        this.labelEquacao.setBounds(420,70,250,30);
         this.labelResultado.setBounds(620,70,150,30);
 
         // Inputs
@@ -56,8 +55,27 @@ public class Janela extends JFrame implements ActionListener {
         this.inputNumero2.setBounds(220, 100, 190, 50);
         this.inputEquacao.setBounds(420, 100, 190, 50);
         this.inputResultado.setBounds(620, 100, 190, 50);
+        this.btnCalcular.setEnabled(false);
         this.btnCalcular.setBounds(220, 200, 190, 50);
         this.btnLimpar.setBounds(420, 200, 190, 50);
+
+        //Validação
+        inputNumero2.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                String regex ="-?\\d+(\\.\\d+)?\n";
+                if (inputNumero1.getText().matches("-?\\d+(\\.\\d+)?") && inputNumero2.getText().matches("-?\\d+(\\.\\d+)?")){
+                    btnCalcular.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog((Component)null, "Digite apenas números válidos");
+                    btnCalcular.setEnabled(false);
+                    inputNumero1.setText("");
+                    inputNumero2.setText("");
+                }
+            }
+        });
+
 
         // Add na tela
         this.add(this.labelInput1);
