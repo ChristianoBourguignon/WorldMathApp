@@ -1,5 +1,5 @@
 package view;
-
+import models.Calculo;
 import java.awt.Color;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
@@ -88,7 +88,17 @@ public class Janela extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent btn) {
         if (btn.getSource() == this.btnCalcular){
-
+            String operacao = this.inputEquacao.getSelectedItem().toString();
+            float numero1 = Float.parseFloat(this.inputNumero1.getText());
+            float numero2 = Float.parseFloat(this.inputNumero2.getText());
+            if (!operacao.equals("/")){
+                int resultado = (int) new Calculo(numero1, numero2, operacao).getResultado();
+                this.inputResultado.setText(String.valueOf(resultado));
+            } else {
+                Float resultado = new Calculo(numero1, numero2, operacao).getResultado();
+                this.inputResultado.setText(String.valueOf(resultado));
+            }
+           
         }
 
         if (btn.getSource() == this.btnLimpar) {
