@@ -4,26 +4,25 @@ import java.awt.Color;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 
 //Obtido maior parte online
 
 public class Janela extends JFrame implements ActionListener {
-    private JButton btnCorrida;
-    private JButton btnCancel;
-    private JLabel lblPista;
-    private ImageIcon imgComida1;
-    private ImageIcon imgComida2;
-    private ImageIcon imgComida3;
-    private ImageIcon pista;
+    private JButton btnCalcular;
+    private JButton btnLimpar;
+    private JTextField inputNumero1;
+    private JTextField inputNumero2;
+    private JTextField inputResultado;
+    private JComboBox<String> inputEquacao;
+    private JLabel labelInput1;
+    private JLabel labelInput2;
+    private JLabel labelEquacao;
+    private JLabel labelResultado;
 
-    private ImageIcon iconImg = new ImageIcon("./src/imagens/icon.png");
+    String[] inputEquacoes = {"+","-","/","*"};
+    //private ImageIcon iconImg = new ImageIcon("");
 
     public Janela() {
         this.setLayout((LayoutManager)null);
@@ -31,25 +30,54 @@ public class Janela extends JFrame implements ActionListener {
         this.setLocation(50, 50);
         this.setResizable(false);
         this.getContentPane().setBackground(Color.white);
-        this.setTitle("Corrida de Threads");
-        this.setIconImage(iconImg.getImage());
-        this.pista = new ImageIcon("./src/imagens/pista.png");
-        this.lblPista = new JLabel(this.pista);
-        this.lblPista.setBounds(0, 0, 1280, 650);
-        this.add(this.lblPista);
-        this.lblPista.setBackground(Color.BLACK);
-        this.btnCorrida = new JButton("Começar Corrida");
-        this.btnCancel = new JButton("Parar Corrida");
-        this.btnCorrida.setBounds(410, 550, 190, 50);
-        this.btnCancel.setBounds(640, 550, 120, 50);
-        this.imgComida1 = new ImageIcon("./src/imagens/morango.png");
-        this.imgComida2 = new ImageIcon("./src/imagens/hamburguer.png");
-        this.imgComida3 = new ImageIcon("./src/imagens/salada.png");
-        this.lblPista.add(this.btnCorrida);
-        this.lblPista.add(this.btnCancel);
+        this.setTitle("Calculadora");
+        //this.setIconImage(iconImg.getImage());
+
+        // Buttons
+        this.btnCalcular = new JButton("Calcular");
+        this.btnLimpar = new JButton("Limpar Campos");
+
+        // labels
+        this.labelInput1 = new JLabel("Digite o 1º numero:");
+        this.labelInput2 = new JLabel("Digite o 2º numero:");
+        this.labelEquacao = new JLabel("Selecione a equação da operação");
+        this.labelResultado = new JLabel("Resultado:");
+        this.labelInput1.setBounds(20,70,150,30);
+        this.labelInput2.setBounds(220,70,150,30);
+        this.labelEquacao.setBounds(420,70,150,30);
+        this.labelResultado.setBounds(620,70,150,30);
+
+        // Inputs
+        this.inputNumero1 = new JTextField();
+        this.inputNumero2 = new JTextField();
+        this.inputEquacao = new JComboBox<>(inputEquacoes);
+        this.inputResultado = new JTextField();
+        this.inputNumero1.setBounds(20, 100, 190, 50);
+        this.inputNumero2.setBounds(220, 100, 190, 50);
+        this.inputEquacao.setBounds(420, 100, 190, 50);
+        this.inputResultado.setBounds(620, 100, 190, 50);
+        this.btnCalcular.setBounds(220, 200, 190, 50);
+        this.btnLimpar.setBounds(420, 200, 190, 50);
+
+        // Add na tela
+        this.add(this.labelInput1);
+        this.add(this.labelInput2);
+        this.add(this.labelEquacao);
+        this.add(this.labelResultado);
+        this.add(this.inputNumero1);
+        this.add(this.inputNumero2);
+        this.add(this.inputEquacao);
+        this.add(this.inputResultado);
+        this.add(this.btnCalcular);
+        this.add(this.btnLimpar);
+
+        //Config inputs
+        this.inputResultado.setEditable(false);
+        this.btnCalcular.addActionListener(this);
+        this.btnLimpar.addActionListener(this);
+
+        // Visible e Config
         this.setVisible(true);
-        this.btnCorrida.addActionListener(this);
-        this.btnCancel.addActionListener(this);
         JPanel jPanel = new JPanel();
         jPanel.setSize(300, 70);
         jPanel.setLayout((LayoutManager)null);
@@ -58,26 +86,16 @@ public class Janela extends JFrame implements ActionListener {
         this.repaint();
     }
 
-//
-//    public JLabel JLabelComida(String nome, ImageIcon img, int posX, int posY) {
-//        ComidaThread comida = new ComidaThread(nome, img, posX, posY);
-//        comida.setSize(256, 141);
-//        comida.setVisible(true);
-//        this.add(comida);
-//        return comida;
-//    }
+    public void actionPerformed(ActionEvent btn) {
+        if (btn.getSource() == this.btnCalcular){
 
-    public void actionPerformed(ActionEvent dispara) {
-//        if (dispara.getSource() == this.btnCorrida){
-//            this.lblPista.add(this.JLabelComida("Morango", this.imgComida1, 0, 50));
-//            this.lblPista.add(this.JLabelComida("Hamburguer", this.imgComida2, 0, 200));
-//            this.lblPista.add(this.JLabelComida("Salada", this.imgComida3, 0, 350));
-//            btnCorrida.setVisible(false);
-//        }
-//
-//        if (dispara.getSource() == this.btnCancel) {
-//            System.exit(0);
-//        }
-//
+        }
+
+        if (btn.getSource() == this.btnLimpar) {
+            this.inputNumero1.setText("");
+            this.inputNumero2.setText("");
+            this.inputResultado.setText("");
+        }
+
     }
 }
